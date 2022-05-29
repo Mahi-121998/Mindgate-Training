@@ -40,11 +40,11 @@ public class ProductController
 	}
 	
 	@RequestMapping(value= "/product/{id}",method=RequestMethod.DELETE, consumes = "application/json", produces ="application/json" )
-	public @ResponseBody Product deleteById(@PathVariable("id") String id) {
-		return productservice.deleteById(id);
+	public  @ResponseBody boolean deleteById(@PathVariable("id") String id) {
+		return true;
 	}
 	@RequestMapping(value= "/product",method=RequestMethod.PUT, consumes = "application/json", produces ="application/json" )
-	public @ResponseBody Product updateById(@RequestBody Product product1) {
-		return productservice.updateById(product1);
+	public @ResponseBody void updateById(@RequestBody Product product1) {
+	  productservice.updateById(product1);
 	}
 }

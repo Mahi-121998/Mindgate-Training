@@ -3,6 +3,7 @@ package com.sky.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.sky.domain.Product;
@@ -12,6 +13,7 @@ import com.sky.repository.ProductRepository;
 public class ProductServiceImpl implements ProductService {
 	
 	@Autowired
+	@Qualifier("ProductRepositoryDBImpl")
 	private ProductRepository productRepository;
 	
 	@Override
@@ -34,13 +36,13 @@ public class ProductServiceImpl implements ProductService {
 		return productRepository.getProductById(id);
 	}
 
-	public Product deleteById(String id) {
+	public boolean deleteById(String id) {
 		return productRepository.deleteById(id);
 	}
 
 	@Override
-	public Product updateById(Product product1) {
-		return productRepository.updateById(product1);
+	public void updateById(Product product1) {
+		productRepository.updateById(product1);
 	
 	}
 
