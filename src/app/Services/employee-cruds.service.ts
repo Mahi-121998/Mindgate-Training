@@ -12,13 +12,29 @@ export class EmployeeCRUDSService {
 
   constructor(private http: HttpClient) { }
 
+
+  getAllEmployee() : Observable<Employee[]>{
+    return this.http.get<Employee[]>(this.baseURL);
+
+  }
+
   addEmployee(employee : Employee) : Observable<boolean>{
     console.log("in EmployeeCRUD service");
     console.log(employee);
     return this.http.post<boolean>(this.baseURL,employee);
-   
-   
-    // console.log("EmployeeCRUDService end");
 
   }
+  deleteEmployee(employeeId: number) : Observable<boolean>{
+    console.log('In delete' + employeeId);
+    return this.http.delete<boolean>(this.baseURL +'/'+ employeeId);
+  }
+  getSingleEmployee(employeeId: number): Observable<Employee>{
+    console.log('in seingle()'+ employeeId);
+    return this.http.get<Employee>(this.baseURL +'/' + employeeId);
+  }
+  updateEmployee(employee: Employee): Observable<boolean>{
+    return this.http.put<boolean>(this.baseURL,employee);
+  }
+
 }
+

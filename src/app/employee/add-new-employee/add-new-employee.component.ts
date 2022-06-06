@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Employee} from 'src/app/pojo/employee';
 import { EmployeeCRUDSService } from 'src/app/Services/employee-cruds.service';
 
@@ -10,18 +11,23 @@ import { EmployeeCRUDSService } from 'src/app/Services/employee-cruds.service';
 export class AddNewEmployeeComponent implements OnInit {
 
   employee: Employee = new Employee();
+  submitted : boolean=false;
 
-  constructor(private employeeService : EmployeeCRUDSService) { }
+  constructor(private employeeService : EmployeeCRUDSService,private router : Router) { }
 
   ngOnInit(): void {
   }
+  goToHome(){
+    this.router.navigate(['/getallemployees'])
+  }
   onFormSubmit(){
+    this.submitted=true;
     console.log(this.employee);
     this.employeeService.addEmployee(this.employee).subscribe(
       data =>{
         console.log(data);
       }
     );
-    alert("Form Submitted succesfully")
+    
   }
 }
